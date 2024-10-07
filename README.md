@@ -1,5 +1,4 @@
 # Android-nRF-Mesh-Library
-[ ![Download](https://maven-badges.herokuapp.com/maven-central/no.nordicsemi.android/mesh/badge.svg?style=plastic) ](https://search.maven.org/artifact/no.nordicsemi.android/mesh)
 
 ## About
 The Android-nRF-Mesh-Library allows provisioning and sending messages to Bluetooth Mesh devices.
@@ -54,20 +53,9 @@ Bluetooth mesh specifications are available at
 * Open 'Android-nRF-Mesh-Library' project using Android Studio.
 * Connect an Android device.
 * Build and run project.
-* To be able to quickly start testing, use the bundled firmwares directory named `ExampleFirmwares`
-that includes a light server (Light source) and a light client (Switch) firmwares. those firmwares
-will work on a `nrf52832` DevKit.
+* To be able to quickly start testing, use [Bluetooth Mesh Samples](https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/mesh.html) from Nordic. Mesh Light and Mesh Light Switch are good starting points. These will work with the nRF5340 Dev kit and Thingy:53 among other Nordic devices.
 
 ## How to include it in your own project
-
-#### Maven Central
-
-The library may be found on the Maven Central repository.
-Add it to your project by adding the following dependency:
-
-```groovy
-implementation 'no.nordicsemi.android:mesh:3.3.4'
-```
 
 #### Manual
 
