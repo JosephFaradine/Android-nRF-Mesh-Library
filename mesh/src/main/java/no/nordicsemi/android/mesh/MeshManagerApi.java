@@ -896,9 +896,7 @@ public class MeshManagerApi implements MeshMngrApi {
             @NonNull int groupHigh, @NonNull int sceneLow, @NonNull int sceneHigh) {
         final MeshNetwork network = new MeshNetwork(meshUuid);
         network.netKeys = generateNetKeysFromQr(meshUuid, netkeys);
-        network.appKeys = generateAppKeysFromQr(meshUuid, appkeys); // JL uncommented this line // Let's not generate app keys
-                                                           // for now
-        // users can add them later
+        network.appKeys = generateAppKeysFromQr(meshUuid, appkeys);
         final AllocatedUnicastRange unicastRange = new AllocatedUnicastRange(unicastLow, unicastHigh);
         final AllocatedGroupRange groupRange = new AllocatedGroupRange(groupLow, groupHigh);
         final AllocatedSceneRange sceneRange = new AllocatedSceneRange(sceneLow, sceneHigh);
@@ -912,10 +910,12 @@ public class MeshManagerApi implements MeshMngrApi {
         network.addProvisioner(provisioner);
         final ProvisionedMeshNode node = network.getNode(unicast);
         if (node != null) {
-            network.unicastAddress = node.getUnicastAddress() + (node.getNumberOfElements() - 1);
+            network.unicastAddress = node.getUnicastAddress() +
+                    (node.getNumberOfElements() - 1);
         } else {
             network.unicastAddress = 1;
         }
+
         network.lastSelected = true;
         network.sequenceNumbers.clear(); // Clear the sequence numbers first
         network.loadSequenceNumbers();
