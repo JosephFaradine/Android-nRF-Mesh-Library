@@ -3,6 +3,7 @@ package no.nordicsemi.android.mesh;
 import android.net.Uri;
 
 import java.util.UUID;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,14 +23,16 @@ interface MeshMngrApi {
     void setMeshManagerCallbacks(@NonNull final MeshManagerCallbacks callbacks);
 
     /**
-     * Sets the {@link MeshProvisioningStatusCallbacks} listener to return provisioning status callbacks.
+     * Sets the {@link MeshProvisioningStatusCallbacks} listener to return
+     * provisioning status callbacks.
      *
      * @param callbacks callbacks
      */
     void setProvisioningStatusCallbacks(@NonNull final MeshProvisioningStatusCallbacks callbacks);
 
     /**
-     * Sets the {@link MeshManagerCallbacks} listener to return mesh status callbacks.
+     * Sets the {@link MeshManagerCallbacks} listener to return mesh status
+     * callbacks.
      *
      * @param callbacks callbacks
      */
@@ -38,8 +41,10 @@ interface MeshMngrApi {
     /**
      * Handles notifications received by the client.
      * <p>
-     * This method will check if the library should wait for more data in case of a gatt layer segmentation.
-     * If its required the method will remove the segmentation bytes and reassemble the pdu together.
+     * This method will check if the library should wait for more data in case of a
+     * gatt layer segmentation.
+     * If its required the method will remove the segmentation bytes and reassemble
+     * the pdu together.
      * </p>
      *
      * @param mtuSize GATT MTU size
@@ -58,22 +63,30 @@ interface MeshMngrApi {
     /**
      * Identifies the node that is to be provisioned.
      * <p>
-     * This method will send a provisioning invite to the connected peripheral. This will help users to identify a particular node before starting the provisioning process.
-     * This method must be invoked before calling {@link #startProvisioning(UnprovisionedMeshNode)}
+     * This method will send a provisioning invite to the connected peripheral. This
+     * will help users to identify a particular node before starting the
+     * provisioning process.
+     * This method must be invoked before calling
+     * {@link #startProvisioning(UnprovisionedMeshNode)}
      * </p
      *
-     * @param deviceUUID Device uuid of the unprovisioned mesh node. This could be obtain by calling {{@link #getMeshBeacon(byte[])}}
+     * @param deviceUUID Device uuid of the unprovisioned mesh node. This could be
+     *                   obtain by calling {{@link #getMeshBeacon(byte[])}}
      */
     void identifyNode(@NonNull final UUID deviceUUID) throws IllegalArgumentException;
 
     /**
      * Identifies the node that is to be provisioned.
      * <p>
-     * This method will send a provisioning invite to the connected peripheral. This will help users to identify a particular node before starting the provisioning process.
-     * This method must be invoked before calling {@link #startProvisioning(UnprovisionedMeshNode)}
+     * This method will send a provisioning invite to the connected peripheral. This
+     * will help users to identify a particular node before starting the
+     * provisioning process.
+     * This method must be invoked before calling
+     * {@link #startProvisioning(UnprovisionedMeshNode)}
      * </p
      *
-     * @param deviceUUID     Device uuid of the unprovisioned mesh node. This could be obtain by calling {{@link #getMeshBeacon(byte[])}}
+     * @param deviceUUID     Device uuid of the unprovisioned mesh node. This could
+     *                       be obtain by calling {{@link #getMeshBeacon(byte[])}}
      * @param attentionTimer Attention timer in seconds
      */
     void identifyNode(@NonNull final UUID deviceUUID, final int attentionTimer) throws IllegalArgumentException;
@@ -81,7 +94,8 @@ interface MeshMngrApi {
     /**
      * Starts provisioning an unprovisioned mesh node
      * <p>
-     * This method will continue the provisioning process that was started by invoking {@link #identifyNode(UUID, int)}.
+     * This method will continue the provisioning process that was started by
+     * invoking {@link #identifyNode(UUID, int)}.
      * </p>
      *
      * @param unprovisionedMeshNode {@link UnprovisionedMeshNode} node
@@ -91,34 +105,40 @@ interface MeshMngrApi {
     /**
      * Starts provisioning an unprovisioned mesh node with static oob
      * <p>
-     * This method will continue the provisioning process that was started by invoking {@link #identifyNode(UUID, int)}.
+     * This method will continue the provisioning process that was started by
+     * invoking {@link #identifyNode(UUID, int)}.
      * </p>
      *
      * @param unprovisionedMeshNode {@link UnprovisionedMeshNode} node
      */
-    void startProvisioningWithStaticOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode) throws IllegalArgumentException;
+    void startProvisioningWithStaticOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode)
+            throws IllegalArgumentException;
 
     /**
      * Starts provisioning an unprovisioned mesh node output oob
      * <p>
-     * This method will continue the provisioning process that was started by invoking {@link #identifyNode(UUID, int)}.
+     * This method will continue the provisioning process that was started by
+     * invoking {@link #identifyNode(UUID, int)}.
      * </p>
      *
      * @param unprovisionedMeshNode {@link UnprovisionedMeshNode} node
      * @param oobAction             selected {@link OutputOOBAction}
      */
-    void startProvisioningWithOutputOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode, final OutputOOBAction oobAction) throws IllegalArgumentException;
+    void startProvisioningWithOutputOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode,
+            final OutputOOBAction oobAction) throws IllegalArgumentException;
 
     /**
      * Starts provisioning an unprovisioned mesh node input OOB
      * <p>
-     * This method will continue the provisioning process that was started by invoking {@link #identifyNode(UUID, int)}.
+     * This method will continue the provisioning process that was started by
+     * invoking {@link #identifyNode(UUID, int)}.
      * </p>
      *
      * @param unprovisionedMeshNode {@link UnprovisionedMeshNode} node
      * @param oobAction             selected {@link InputOOBAction}
      */
-    void startProvisioningWithInputOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode, @NonNull final InputOOBAction oobAction) throws IllegalArgumentException;
+    void startProvisioningWithInputOOB(@NonNull final UnprovisionedMeshNode unprovisionedMeshNode,
+            @NonNull final InputOOBAction oobAction) throws IllegalArgumentException;
 
     /**
      * Set the provisioning confirmation
@@ -153,7 +173,8 @@ interface MeshMngrApi {
     byte[] getMeshBeaconData(final byte[] advertisementData);
 
     /**
-     * Returns a {@link UnprovisionedBeacon}, {@link SecureNetworkBeacon} based on the advertised service data
+     * Returns a {@link UnprovisionedBeacon}, {@link SecureNetworkBeacon} based on
+     * the advertised service data
      *
      * @param beaconData beacon data advertised by the mesh beacon
      */
@@ -180,7 +201,8 @@ interface MeshMngrApi {
      * Checks if the node is advertising with Node Identity
      *
      * @param serviceData advertised service data
-     * @return returns true if the node is advertising with Node Identity or false otherwise
+     * @return returns true if the node is advertising with Node Identity or false
+     *         otherwise
      */
     boolean isAdvertisedWithNodeIdentity(@NonNull final byte[] serviceData);
 
@@ -196,7 +218,8 @@ interface MeshMngrApi {
     boolean networkIdMatches(@NonNull final String networkId, @NonNull final byte[] serviceData);
 
     /**
-     * Checks if the generated network ids match. The network ID contained in the service data would be checked against a network id of each network key.
+     * Checks if the generated network ids match. The network ID contained in the
+     * service data would be checked against a network id of each network key.
      *
      * @param serviceData advertised service data
      * @return returns true if the network ids match or false otherwise
@@ -212,10 +235,12 @@ interface MeshMngrApi {
     boolean isAdvertisingWithNetworkIdentity(@NonNull final byte[] serviceData);
 
     /**
-     * Sends the specified  mesh message specified within the {@link MeshMessage} object
+     * Sends the specified mesh message specified within the {@link MeshMessage}
+     * object
      *
      * @param dst         destination address
-     * @param meshMessage {@link MeshMessage} Mesh message containing the message opcode and message parameters
+     * @param meshMessage {@link MeshMessage} Mesh message containing the message
+     *                    opcode and message parameters
      */
     void createMeshPdu(final int dst, @NonNull final MeshMessage meshMessage) throws IllegalArgumentException;
 
@@ -223,24 +248,26 @@ interface MeshMngrApi {
      * Loads the mesh network from the local database.
      * <p>
      * This will start an AsyncTask that will load the network from the database.
-     * {@link MeshManagerCallbacks#onNetworkLoaded(MeshNetwork) will return the mesh network
+     * {@link MeshManagerCallbacks#onNetworkLoaded(MeshNetwork) will return the mesh
+     * network
      * </p>
      */
     void loadMeshNetwork();
 
     /**
-     * Returns an already loaded mesh network, make sure to call {@link #loadMeshNetwork()} before calling this
+     * Returns an already loaded mesh network, make sure to call
+     * {@link #loadMeshNetwork()} before calling this
      *
      * @return {@link MeshNetwork}
      */
     @Nullable
     MeshNetwork getMeshNetwork();
 
-
     /**
      * Returns the current IV Test mode.
      * IV Update Test Mode enables efficient testing of the IV Update procedure.
-     * The IV Update test mode removes the 96-hour limit; all other behavior of the device are unchanged.
+     * The IV Update test mode removes the 96-hour limit; all other behavior of the
+     * device are unchanged.
      * - seeAlso: Bluetooth Mesh Profile 1.0.1, section 3.10.5.1.
      */
     boolean isIvUpdateTestModeActive();
@@ -248,7 +275,8 @@ interface MeshMngrApi {
     /**
      * Set IV Update test mode.
      * IV Update Test Mode enables efficient testing of the IV Update procedure.
-     * * The IV Update test mode removes the 96-hour limit; all other behavior of the device are unchanged.
+     * * The IV Update test mode removes the 96-hour limit; all other behavior of
+     * the device are unchanged.
      * * - seeAlso: Bluetooth Mesh Profile 1.0.1, section 3.10.5.1.
      *
      * @param ivUpdateTestMode True if the test mode is active or false otherwise.
@@ -257,15 +285,23 @@ interface MeshMngrApi {
 
     /**
      * Allow Iv Index recovery over 42.
-     * According to Bluetooth Mesh Profile 1.0.1, section 3.10.5, if the IV Index of the mesh
-     * network increased by more than 42 since the last connection (which can take at least
-     * 48 weeks), the Node should be re-provisioned. However, as this library can be used to
-     * provision other Nodes, it should not be blocked from sending messages to the network
-     * only because the phone wasn't connected to the network for that time. This flag can
+     * According to Bluetooth Mesh Profile 1.0.1, section 3.10.5, if the IV Index of
+     * the mesh
+     * network increased by more than 42 since the last connection (which can take
+     * at least
+     * 48 weeks), the Node should be re-provisioned. However, as this library can be
+     * used to
+     * provision other Nodes, it should not be blocked from sending messages to the
+     * network
+     * only because the phone wasn't connected to the network for that time. This
+     * flag can
      * disable this check, effectively allowing such connection.
-     * The same can be achieved by clearing the app data (uninstalling and reinstalling the
-     * app) and importing the mesh network. With no "previous" IV Index, the library will
-     * accept any IV Index received in the Secure Network beacon upon connection to the
+     * The same can be achieved by clearing the app data (uninstalling and
+     * reinstalling the
+     * app) and importing the mesh network. With no "previous" IV Index, the library
+     * will
+     * accept any IV Index received in the Secure Network beacon upon connection to
+     * the
      * GATT Proxy Node.
      */
     void allowIvIndexRecoveryOver42(final boolean allowIvIndexRecoveryOver42);
@@ -277,7 +313,8 @@ interface MeshMngrApi {
     String exportMeshNetwork();
 
     /**
-     * Exports a partial mesh network to a json String with the provided export configuration.
+     * Exports a partial mesh network to a json String with the provided export
+     * configuration.
      *
      * @param networkKeysConfig     Export configuration for Network Keys.
      * @param applicationKeysConfig Export configuration for Application Keys.
@@ -288,25 +325,39 @@ interface MeshMngrApi {
      */
     @Nullable
     String exportMeshNetwork(@NonNull final NetworkKeysConfig networkKeysConfig,
-                             @NonNull final ApplicationKeysConfig applicationKeysConfig,
-                             @NonNull final NodesConfig nodesConfig,
-                             @NonNull final ProvisionersConfig provisionersConfig,
-                             @NonNull final GroupsConfig groupsConfig,
-                             @NonNull final ScenesConfig scenesConfig);
+            @NonNull final ApplicationKeysConfig applicationKeysConfig,
+            @NonNull final NodesConfig nodesConfig,
+            @NonNull final ProvisionersConfig provisionersConfig,
+            @NonNull final GroupsConfig groupsConfig,
+            @NonNull final ScenesConfig scenesConfig);
 
     /**
-     * Starts an asynchronous task that imports a network from the mesh configuration db json
+     * Starts an asynchronous task that imports a network from the mesh
+     * configuration db json
      *
      * @param uri path to the mesh configuration database json file.
      */
     void importMeshNetwork(@NonNull final Uri uri);
 
     /**
-     * Starts an asynchronous task that imports a network from the mesh configuration db json
+     * Starts an asynchronous task that imports a network from the mesh
+     * configuration db json
      *
      * @param networkJson configuration database json.
      */
     void importMeshNetworkJson(@NonNull final String networkJson);
+
+    /**
+     * Starts an asynchronous task that imports a network from the mesh
+     * configuration db json
+     *
+     * @param uuid UUID for the mesh network
+     * @param ...
+     */
+    void importMeshNetworkFromQr(@NonNull final String uuid, @NonNull final List<byte[]> netkeys,
+            @NonNull final List<byte[]> appkeys, @NonNull final int unicastLow, @NonNull final int unicastHight,
+            @NonNull final int groupLow, @NonNull final int groupHigh, @NonNull final int sceneLow,
+            @NonNull final int sceneHigh);
 
     /**
      * Generates a random virtual address
