@@ -206,6 +206,10 @@ public class MeshManagerApi implements MeshMngrApi {
         this.allowIvIndexRecoveryOver42 = allowIvIndexRecoveryOver42;
     }
 
+    public boolean getIsNetworkImportInProgress() {
+        return isNetworkImportInProgress;
+    }
+
     private void initBouncyCastle() {
         Security.insertProviderAt(new org.spongycastle.jce.provider.BouncyCastleProvider(), 1);
     }
@@ -871,7 +875,7 @@ public class MeshManagerApi implements MeshMngrApi {
         final AllocatedUnicastRange unicastRange = new AllocatedUnicastRange(0x0001, 0x199A);
         final AllocatedGroupRange groupRange = new AllocatedGroupRange(0xC000, 0xCC9A);
         final AllocatedSceneRange sceneRange = new AllocatedSceneRange(0x0001, 0x3333);
-        final Provisioner provisioner = network.createProvisioner("nRF Mesh Provisioner", unicastRange, groupRange,
+        final Provisioner provisioner = network.createProvisioner("BCON Provisioner", unicastRange, groupRange,
                 sceneRange);
         final int unicast = provisioner.getAllocatedUnicastRanges().get(0).getLowAddress();
         provisioner.assignProvisionerAddress(unicast);
@@ -896,13 +900,14 @@ public class MeshManagerApi implements MeshMngrApi {
             @NonNull int groupHigh, @NonNull int sceneLow, @NonNull int sceneHigh) {
         final MeshNetwork network = new MeshNetwork(meshUuid);
         network.netKeys = generateNetKeysFromQr(meshUuid, netkeys);
-        network.appKeys = generateAppKeysFromQr(meshUuid, appkeys); // JL uncommented this line // Let's not generate app keys
-                                                           // for now
+        network.appKeys = generateAppKeysFromQr(meshUuid, appkeys); // JL uncommented this line // Let's not generate
+                                                                    // app keys
+        // for now
         // users can add them later
         final AllocatedUnicastRange unicastRange = new AllocatedUnicastRange(unicastLow, unicastHigh);
         final AllocatedGroupRange groupRange = new AllocatedGroupRange(groupLow, groupHigh);
         final AllocatedSceneRange sceneRange = new AllocatedSceneRange(sceneLow, sceneHigh);
-        final Provisioner provisioner = network.createProvisioner("nRF Mesh Provisioner", unicastRange, groupRange,
+        final Provisioner provisioner = network.createProvisioner("BCON Provisioner", unicastRange, groupRange,
                 sceneRange);
 
         // Need to choose a new provisioner address to work correctly
@@ -1541,4 +1546,5 @@ public class MeshManagerApi implements MeshMngrApi {
         node.setUnicastAddress(mMeshNetwork.getUnicastAddress());
         return true;
     }
+
 }

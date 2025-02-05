@@ -54,7 +54,7 @@ public class Provisioner implements Parcelable, Cloneable {
 
     @ColumnInfo(name = "name")
     @Expose
-    private String provisionerName = "nRF Mesh Provisioner";
+    private String provisionerName = "BCON Provisioner";
 
     @ColumnInfo(name = "allocated_unicast_ranges")
     @TypeConverters(MeshTypeConverters.class)
