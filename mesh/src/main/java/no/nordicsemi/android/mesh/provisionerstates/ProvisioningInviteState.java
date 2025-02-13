@@ -22,6 +22,8 @@
 
 package no.nordicsemi.android.mesh.provisionerstates;
 
+import no.nordicsemi.android.mesh.logger.MeshLogger;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 import no.nordicsemi.android.mesh.InternalTransportCallbacks;
@@ -41,14 +43,16 @@ public class ProvisioningInviteState extends ProvisioningState {
      *
      * @param node                        {@link UnprovisionedMeshNode} node.
      * @param attentionTimer              Duration of attention timer.
-     * @param internalTransportCallbacks  {@link InternalTransportCallbacks} callbacks.
-     * @param provisioningStatusCallbacks {@link MeshProvisioningStatusCallbacks} callbacks.
+     * @param internalTransportCallbacks  {@link InternalTransportCallbacks}
+     *                                    callbacks.
+     * @param provisioningStatusCallbacks {@link MeshProvisioningStatusCallbacks}
+     *                                    callbacks.
      */
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     public ProvisioningInviteState(final UnprovisionedMeshNode node,
-                                   final int attentionTimer,
-                                   final InternalTransportCallbacks internalTransportCallbacks,
-                                   final MeshProvisioningStatusCallbacks provisioningStatusCallbacks) {
+            final int attentionTimer,
+            final InternalTransportCallbacks internalTransportCallbacks,
+            final MeshProvisioningStatusCallbacks provisioningStatusCallbacks) {
         super();
         this.node = node;
         this.attentionTimer = attentionTimer;
@@ -64,7 +68,8 @@ public class ProvisioningInviteState extends ProvisioningState {
     @Override
     public void executeSend() {
         final byte[] invitePDU = createInvitePDU();
-        //We store the provisioning invite pdu to be used when generating confirmation inputs
+        // We store the provisioning invite pdu to be used when generating confirmation
+        // inputs
         node.setProvisioningInvitePdu(invitePDU);
         mStatusCallbacks.onProvisioningStateChanged(node, States.PROVISIONING_INVITE, invitePDU);
         mInternalTransportCallbacks.sendProvisioningPdu(node, invitePDU);
@@ -76,15 +81,18 @@ public class ProvisioningInviteState extends ProvisioningState {
     }
 
     /**
-     * Generates the invitePDU for provisioning based on the attention timer provided by the user.
+     * Generates the invitePDU for provisioning based on the attention timer
+     * provided by the user.
      */
     private byte[] createInvitePDU() {
 
         final byte[] data = new byte[3];
-        data[0] = MeshManagerApi.PDU_TYPE_PROVISIONING; //Provisioning Opcode;
-        //noinspection ConstantConditions
-        data[1] = TYPE_PROVISIONING_INVITE; //PDU type in
+        data[0] = MeshManagerApi.PDU_TYPE_PROVISIONING; // Provisioning Opcode;
+        // noinspection ConstantConditions
+        data[1] = TYPE_PROVISIONING_INVITE; // PDU type in
         data[2] = (byte) attentionTimer;
+        MeshLogger.debug(TAG, "attentionTimer: " + attentionTimer);
+
         return data;
     }
 }

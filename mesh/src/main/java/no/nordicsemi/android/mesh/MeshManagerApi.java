@@ -607,6 +607,7 @@ public class MeshManagerApi implements MeshMngrApi {
     @Override
     public void identifyNode(@NonNull final UUID deviceUuid,
             final int attentionTimer) throws IllegalArgumentException {
+        // attention timer is successfully set here from flutter layer
         final NetworkKey networkKey = mMeshNetwork.getPrimaryNetworkKey();
         if (networkKey != null) {
             mMeshProvisioningHandler.identify(deviceUuid, networkKey, mMeshNetwork.getProvisioningFlags(),
