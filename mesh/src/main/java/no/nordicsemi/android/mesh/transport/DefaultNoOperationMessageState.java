@@ -567,7 +567,15 @@ class DefaultNoOperationMessageState extends MeshMessageState {
                             vendorModelMessageUnacked.getModelIdentifier());
                     mMeshStatusCallbacks.onMeshMessageReceived(message.getSrc(), status);
                 } else {
-                    handleUnknownPdu(message);
+                    // Used to just call handleUnknownPdu(message), but this was based on what mMeshMessage
+                    // is. However, mMeshMessage is set to whatever was the last sent unicast message.
+                    // Changing this to report a VendorModelMessageStatus just without the model identifier.
+                    /// handleUnknownPdu(message);
+
+                    final VendorModelMessageStatus status = new VendorModelMessageStatus(message,0);
+                    mMeshStatusCallbacks.onMeshMessageReceived(message.getSrc(), status);
+                    MeshLogger.verbose(TAG, "Vendor model Access PDU Received with unknown model identifier: "
+                            + MeshParserUtils.bytesToHex(message.getAccessPdu(), false));
                 }
                 break;
         }
