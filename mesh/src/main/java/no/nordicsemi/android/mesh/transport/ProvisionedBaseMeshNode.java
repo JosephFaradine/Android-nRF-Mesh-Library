@@ -67,7 +67,7 @@ abstract class ProvisionedBaseMeshNode implements Parcelable {
     public long mTimeStampInMillis;
     @ColumnInfo(name = "name")
     @Expose
-    protected String nodeName = "My Node";
+    protected String nodeName = "BCON";
     @ColumnInfo(name = "ttl")
     @Expose
     protected Integer ttl = 5;

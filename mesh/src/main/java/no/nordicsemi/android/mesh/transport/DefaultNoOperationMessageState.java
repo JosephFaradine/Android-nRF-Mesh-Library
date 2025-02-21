@@ -574,7 +574,7 @@ class DefaultNoOperationMessageState extends MeshMessageState {
 
                     final VendorModelMessageStatus status = new VendorModelMessageStatus(message,0);
                     mMeshStatusCallbacks.onMeshMessageReceived(message.getSrc(), status);
-                    MeshLogger.verbose(TAG, "Vendor model Access PDU Received with unknown model identifier: "
+                    MeshLogger.verbose(TAG, "Vendor model Access PDU Received from source " + message.getSrc() + "with unknown model identifier: "
                             + MeshParserUtils.bytesToHex(message.getAccessPdu(), false));
                 }
                 break;
