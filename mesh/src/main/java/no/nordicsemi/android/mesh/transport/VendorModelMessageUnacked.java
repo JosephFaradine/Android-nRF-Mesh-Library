@@ -18,7 +18,7 @@ public class VendorModelMessageUnacked extends ApplicationMessage {
     private final int mOpCode;
 
     /**
-     * Constructs VendorModelMessageAcked message.
+     * Constructs VendorModelMessageUnacked message.
      *
      * @param appKey            {@link ApplicationKey} for this message
      * @param modelId           model identifier
