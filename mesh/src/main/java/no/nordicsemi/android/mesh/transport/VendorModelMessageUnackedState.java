@@ -82,7 +82,7 @@ class VendorModelMessageUnackedState extends ApplicationMessageState {
 
     @Override
     public void executeSend() {
-        MeshLogger.verbose(TAG, "Sending acknowledged vendor model message");
+        MeshLogger.verbose(TAG, "Sending unacknowledged vendor model message");
         super.executeSend();
     }
 }

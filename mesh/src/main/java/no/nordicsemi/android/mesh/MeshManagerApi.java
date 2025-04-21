@@ -1118,6 +1118,12 @@ public class MeshManagerApi implements MeshMngrApi {
         }
     }
 
+    public void onMeshNodeReset(final ProvisionedMeshNode meshNode) {
+        if (meshNode != null) {
+            mMeshNetwork.deleteNode(meshNode);
+        }
+    }
+
     @SuppressWarnings("FieldCanBeLocal")
     private final InternalTransportCallbacks internalTransportCallbacks = new InternalTransportCallbacks() {
 
